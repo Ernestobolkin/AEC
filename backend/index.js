@@ -5,9 +5,10 @@ const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
 const { verifyJwt, jwtCreate } = require("./service/jwtService");
+const { Payment } = require("./models/Payment");
 
 // should be in env or config file
-const mongoURI = ''; 
+const mongoURI = 'mongodb+srv://elzo:XhxnvNubdu@ertodatabase.ilvau.mongodb.net/?retryWrites=true&w=majority'; 
 
 app.use(cors()); 
 app.use(express.json());
@@ -36,7 +37,20 @@ app.post("/login", (req, res) => {
 
 app.put("/update", (req, res) => {
   try{
-    
+    if(req.body?.payment && req.body?.payment !== null){
+      const { Name, Description, Date, Amount } = req.body;
+      const payment = new Payment({
+        Name,
+        Description,
+        Date,
+        Amount
+      });
+      payment.save().then(() => {
+        res.send("Payment updated").status(200);
+      }).catch((error) => {
+        console.log(error);
+    })
+  }
   }catch(Exception){
     res.send(Exception).status(400);
   }
