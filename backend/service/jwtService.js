@@ -22,11 +22,11 @@ const verifyJwt = (req, res, next) => {
 } 
 
  const jwtCreate = (req, res) => {
-    const tokent = jwt.sign({
+    const token = jwt.sign({
         user: req.body.userName,
         password: req.body.password
-    }, config.jwtSecret, {expiresIn: "1 seconds"},)
-    return tokent;
+    }, config.jwtSecret, {expiresIn: "1 s"},)
+    return token;
 }
 
 module.exports = { 
