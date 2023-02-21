@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import apiService from "../../service/apiService";
+// import apiService from "../../service/apiService";
 
-export const TableCrud = () => {
+const TableCrud = () => {
     const [paymentData, setPaymentData] = useState({
         name:"",
         description:"",
@@ -79,3 +79,6 @@ export const TableCrud = () => {
         </>
     )
 }
+
+
+export default TableCrud;

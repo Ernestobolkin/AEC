@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import apiService from "../../service/apiService";
 import "./Home.scss"
-export const HomePage = () => {
+const HomePage = () => {
     const [userData, setUserData] = useState({
         userName: "",
         password: "",
@@ -33,7 +33,7 @@ export const HomePage = () => {
     }
     return (
         <div>
-            {/* <div className="conatiner">
+            <div className="conatiner">
                 <form className="row g-3" onSubmit={submit}>
                     <div className="mb-3">
                         <label htmlFor="UserName" className="form-label">UserName</label>
@@ -63,8 +63,10 @@ export const HomePage = () => {
                 <div className="row">
                     <button className="btn btn-secondary" onClick={checkMe}>check-me</button>
                 </div>
-            </div> */}
+            </div>
 
         </div>
     );
 };
+
+export default HomePage;
