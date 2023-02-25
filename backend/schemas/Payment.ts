@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 
 const Payment = new mongoose.Schema({
@@ -22,3 +22,5 @@ const Payment = new mongoose.Schema({
   });
 
   const payment = mongoose.model('Payment', Payment);
+
+export default payment;

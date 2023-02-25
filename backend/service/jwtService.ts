@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config")
-const verifyJwt = (req, res, next) => {
+import config  from "../config";
+import jwt from "jsonwebtoken";
+
+
+export const verifyJwt = (req, res, next) => {
     try {
         const token = req.headers["authorization"]?.split(" ")[1];
         if (token) {
@@ -21,7 +24,7 @@ const verifyJwt = (req, res, next) => {
     
 } 
 
- const jwtCreate = (req, res) => {
+export const jwtCreate = (req, res) => {
     const token = jwt.sign({
         user: req.body.userName,
         password: req.body.password
@@ -29,9 +32,6 @@ const verifyJwt = (req, res, next) => {
     return token;
 }
 
-module.exports = { 
-    verifyJwt,
-    jwtCreate
-};
+
 
 

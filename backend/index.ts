@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 const app = express();
 const port = process.env.PORT || 8080;
-const cors = require("cors");
-const path = require("path");
-const mongoose = require("mongoose");
-const { verifyJwt, jwtCreate } = require("./service/jwtService");
-const { Payment } = require("./models/Payment");
+import cors from "cors";
+import path from "path";
+import mongoose from "mongoose";
+import { verifyJwt, jwtCreate } from "./service/jwtService";
+import Payment  from "./models/Payment";
 
 // should be in env or config file
 const mongoURI = 'mongodb+srv://elzo:XhxnvNubdu@ertodatabase.ilvau.mongodb.net/?retryWrites=true&w=majority'; 
@@ -57,7 +57,7 @@ app.put("/update", (req, res) => {
 })
 
 mongoose.set('strictQuery', true);
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoURI)
   .then(() => {
     console.log("MongoDB Connected");
     app.listen(port, () => {
