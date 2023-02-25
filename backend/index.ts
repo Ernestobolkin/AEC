@@ -8,7 +8,7 @@ import { verifyJwt, jwtCreate } from "./service/jwtService";
 import Payment  from "./models/Payment";
 
 // should be in env or config file
-const mongoURI = 'mongodb+srv://elzo:XhxnvNubdu@ertodatabase.ilvau.mongodb.net/?retryWrites=true&w=majority'; 
+const mongoURI = ''; 
 
 app.use(cors()); 
 app.use(express.json());
