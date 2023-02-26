@@ -28,7 +28,7 @@ export const jwtCreate = (req, res) => {
     const token = jwt.sign({
         user: req.body.userName,
         password: req.body.password
-    }, config.jwtSecret, {expiresIn: "1 s"},)
+    }, config.jwtSecret, {expiresIn: "1 d"},)
     return token;
 }
 

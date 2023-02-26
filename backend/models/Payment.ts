@@ -11,9 +11,8 @@ const Payment = new mongoose.Schema({
         required: false
     },
     Date: {
-        type: Date,
-        required: true,
-        default:new Date(new Date().toLocaleTimeString("he-IL", {timeZone: "Asia/Jerusalem"}))
+        type: String,
+        default:new Date().toLocaleTimeString("he-IL", {timeZone: "Asia/Jerusalem"}) + " " + new Date().toLocaleDateString("he-IL", {timeZone: "Asia/Jerusalem"})
     },
     Amount: {
         type: Number,
