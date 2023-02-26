@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import apiService from "../../service/apiService";
+import { generalRequest } from "../../service/apiService";
 
 const TableCrud = () => {
     const [paymentData, setPaymentData] = useState({
@@ -20,8 +21,27 @@ const TableCrud = () => {
     const submit = async (event: any) => {
         event.preventDefault();
         console.log(paymentData);
-        setPaymentList([...paymentList, paymentData]);
+        // setPaymentList([...paymentList, paymentData]);
+        generalRequest("update", "POST", paymentData);
     }
+    const getData = async () => {
+        let responseData = await generalRequest("payments", "GET");
+        responseData.forEach((payment: any) => {
+            setPaymentList([...paymentList, {
+                name: payment.Name,
+                description: payment.Description,
+                date: payment.Date,
+                amount: payment.Amount,
+            }]);
+        });
+        console.log("responseData",responseData)
+        console.log(paymentList)
+    }
+
+    useEffect  (() => {
+        getData();
+    }, [])
+    
 
     return(
         <>

@@ -17,7 +17,7 @@ interface User {
     password: string;
 }
 
-const loginRequest = async( userData:User ) => {
+export const loginRequest = async( userData:User ) => {
     try{
         const response = await generalRequest("login", "POST", userData);
         if(response && response.data){
@@ -28,13 +28,14 @@ const loginRequest = async( userData:User ) => {
     }
 }
 
-const generalRequest = async (url: string, method: string, body?: any) => {
+export const generalRequest = async (url: string, method: string, body?: any) => {
+    console.log(`${enviroment.API_URL}/${url}`);
     try {
        switch (method) {
             case "GET":
                {
                     const response = await axios.get(`${enviroment.API_URL}/${url}`, { headers: getHeaders() });
-                    return response;
+                    return response.data;
                }
             case "POST":
                {
@@ -69,7 +70,3 @@ const getHeaders = () => {
     }
     return headers;
 }
-
-
-
-export default { generalRequest, loginRequest };

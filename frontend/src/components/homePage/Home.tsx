@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import apiService from "../../service/apiService";
+import { loginRequest ,generalRequest } from "../../service/apiService";
 import "./Home.scss"
 const HomePage = () => {
     const [userData, setUserData] = useState({
@@ -22,13 +22,13 @@ const HomePage = () => {
 
     const submit = async (event: any) => {
         event.preventDefault();
-        const response = await apiService.loginRequest(userData);
+        const response = await loginRequest(userData);
         console.log(response);
     }
 
     const checkMe = async () => {
         console.log("check me");
-        const response = await apiService.generalRequest("test", "GET");
+        const response = await generalRequest("test", "GET");
         console.log(response);
     }
     return (
