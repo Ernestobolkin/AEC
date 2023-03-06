@@ -14,7 +14,7 @@ interface Error {
 
 interface User {
     userName: string;
-    password: string;
+    passWord: string;
 }
 
 export const loginRequest = async( userData:User ) => {

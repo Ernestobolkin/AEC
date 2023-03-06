@@ -4,7 +4,7 @@ import "./Home.scss"
 const HomePage = () => {
     const [userData, setUserData] = useState({
         userName: "",
-        password: "",
+        passWord: "",
     });
 
 
@@ -12,6 +12,7 @@ const HomePage = () => {
 
     // useEffect(() => {
     // })
+
     // If there is no extra use for this function, you can just use onChange={event => setUserData({ ...userData, [event.target.name]: event.target.value })} on the input
     const onChange = (event: any) => {
         setUserData({
@@ -36,12 +37,12 @@ const HomePage = () => {
             <div className="conatiner">
                 <form className="row g-3" onSubmit={submit}>
                     <div className="mb-3">
-                        <label htmlFor="UserName" className="form-label">UserName</label>
+                        <label htmlFor="" className="form-label">UserName</label>
                         <input 
                             type="text" 
                             onChange={onChange}
                             value={userData.userName} 
-                            className="form-control userName" 
+                            className=" userName" 
                             name="userName" 
                             placeholder="Enter your username"
                             />
@@ -51,7 +52,7 @@ const HomePage = () => {
                         <input 
                             type="password" 
                             onChange={onChange} 
-                            value={userData.password} 
+                            value={userData.passWord} 
                             className="form-control password" 
                             name="password" 
                             placeholder="Enter your password" />
