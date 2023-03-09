@@ -4,9 +4,8 @@ const port = process.env.PORT || 8080;
 import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
-import { verifyJwt, jwtCreate } from "./service/jwtService";
 import { login } from "./routers/login";
-import { updatePayment, getPayments } from "./routers/dataTable";
+import { updatePayment, getPayments } from "./routers/dataTable/payments";
 
 // should be in env or config file
 const mongoURI = ''; 
