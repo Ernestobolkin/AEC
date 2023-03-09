@@ -17,6 +17,10 @@ const Payment = new mongoose.Schema({
     Amount: {
         type: Number,
         required: true
+    },
+    Card: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Card'
     }
   });
 
