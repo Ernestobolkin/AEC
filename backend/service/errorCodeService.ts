@@ -21,6 +21,11 @@ import { ErrorCode } from "../interfaces/userInterface";
 // 7 = Failed to create user account, mongoDB error.
 // 8 = bycrypt error while hashing password
 
+// Error code numbers for Login error || LG
+// 1 = Invalid login credentials
+// 2 = Failed to login, jwt error.
+
+
 
   
 const generateErrorCode = (type: string, number: number, customMessage?: string): ErrorCode => {
@@ -41,7 +46,6 @@ const generateErrorCode = (type: string, number: number, customMessage?: string)
         message = customMessage || `General error`;
         break;
     }
-    console.log(customMessage);
     return { code, message };
   };
 
