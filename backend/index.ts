@@ -6,9 +6,11 @@ import path from "path";
 import mongoose from "mongoose";
 import { login } from "./routers/login";
 import { updatePayment, getPayments } from "./routers/dataTable/payments";
+import { createCard } from "./routers/dataTable/card";
+import { register } from "./routers/register";
+import Config from "./config";
 
-// should be in env or config file
-const mongoURI = ''; 
+const mongoURL = Config.mongoConnectionString || ""; 
 
 app.use(cors()); 
 app.use(express.json());
@@ -21,13 +23,17 @@ app.get("/", (req, res) => {
 
 app.post("/login", login);
 
+app.post("/register", register);
+
 app.put("/update/:id", updatePayment);
 
-app.get("/payments", updatePayment);
+app.get("/payments", getPayments);
+
+app.post("/card", createCard);
 
 
 mongoose.set('strictQuery', true);
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURL)
   .then(() => {
     console.log("MongoDB Connected");
     app.listen(port, () => {
