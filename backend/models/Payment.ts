@@ -17,7 +17,7 @@ const Payment = new mongoose.Schema({
     Amount: {
         type: Number,
         required: true
-    }
+    },
   });
 
   const payment = mongoose.model('Payment', Payment);

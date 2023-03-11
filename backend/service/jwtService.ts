@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 import config  from "../config";
 import jwt from "jsonwebtoken";
+import { IUser } from "../interfaces/userInterface";
+
 
 
 export const verifyJwt = (req, res, next) => {
@@ -24,10 +26,10 @@ export const verifyJwt = (req, res, next) => {
     
 } 
 
-export const jwtCreate = (req, res) => {
+export const jwtCreate = (user: IUser) => {
     const token = jwt.sign({
-        user: req.body.userName,
-        password: req.body.password
+        user: user.UserName,
+        email: user.Email,
     }, config.jwtSecret, {expiresIn: "1 d"},)
     return token;
 }
