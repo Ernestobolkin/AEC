@@ -9,9 +9,11 @@ const createCard = async (req: Request, res: Response) => {
             cardName: cardName
         });
         await card.save();
-        //create code messages for the client
+        
         res.send("Card wat created").status(200);
     }catch(Exception){
         res.send(Exception).status(400);
     }
 }
+
+export { createCard };

@@ -18,10 +18,6 @@ const Payment = new mongoose.Schema({
         type: Number,
         required: true
     },
-    Card: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Card'
-    }
   });
 
   const payment = mongoose.model('Payment', Payment);
