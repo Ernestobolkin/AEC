@@ -12,7 +12,6 @@ const updatePayment = async (req: Request, res: Response) => {
         Amount
       });
       await payment.save();
-        //create code messages for the client
       res.send("Payment updated").status(200);
     }
   } catch (Exception) {
@@ -23,6 +22,9 @@ const updatePayment = async (req: Request, res: Response) => {
 
 const getPayments = async (req: Request, res: Response) => {
     try {
+      if(!req.body?.user){
+        res.send("Season Expired ").status(400);
+      }
         const payments = await Payment.find({});
         res.send(payments).status(200);
     } catch (Exception) {

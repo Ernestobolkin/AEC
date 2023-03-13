@@ -9,6 +9,7 @@ import { updatePayment, getPayments } from "./routers/dataTable/payments";
 import { createCard } from "./routers/dataTable/card";
 import { register } from "./routers/register";
 import Config from "./config";
+import { verifyJwt } from "./service/jwtService";
 
 const mongoURL = Config.mongoConnectionString || ""; 
 
@@ -27,7 +28,7 @@ app.post("/register", register);
 
 app.put("/update/:id", updatePayment);
 
-app.get("/payments", getPayments);
+app.get("/payments",verifyJwt, getPayments);
 
 app.post("/card", createCard);
 
