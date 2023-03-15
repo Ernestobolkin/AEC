@@ -22,8 +22,8 @@ const updatePayment = async (req: Request, res: Response) => {
 
 const getPayments = async (req: Request, res: Response) => {
     try {
-      if(!req.body?.user){
-        res.send("Season Expired ").status(400);
+      if(!req.body?.userName){
+        return res.send("Season Expired ").status(400);
       }
         const payments = await Payment.find({});
         res.send(payments).status(200);

@@ -7,11 +7,11 @@ const loginService = async (user: IUserCreation) => {
     try{
         const existingUser = await getUserByUserName(user.userName);
         if(!existingUser){
-            return generateErrorCode("LG", 1);
+            return generateErrorCode("LOGIN", 1);
         }
         const userData = await loginUser(user);
         if(userData === null){
-            return generateErrorCode("LG", 1);
+            return generateErrorCode("LOGIN", 1);
         }
         return userData;
     }catch(Exception){

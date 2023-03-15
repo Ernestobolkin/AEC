@@ -1,6 +1,7 @@
 import { jwtCreate } from "../service/jwtService";
 import { Request, Response } from "express";
 import { loginService } from "../service/loginService";
+import { generateErrorCode } from "../service/errorCodeService";
 
 const login = async (req: Request, res: Response) => {
   try {
@@ -11,6 +12,9 @@ const login = async (req: Request, res: Response) => {
         }else{
           res.send(responseData).status(400);
         }
+      }else{
+        const errorCode = generateErrorCode("LOGIN", 1);
+        res.send(errorCode).status(400);
       }
   } catch (Exception) {
       res.send(Exception).status(400);
