@@ -5,8 +5,8 @@ const createCard = async (req: Request, res: Response) => {
     try{
         const { cardIdentifierNumber, cardName } = req.body;
         const card = new Card({
-            cardIdentifierNumber: cardIdentifierNumber,
-            cardName: cardName
+            CardIdentifierNumber: cardIdentifierNumber,
+            CardName: cardName,
         });
         await card.save();
         
