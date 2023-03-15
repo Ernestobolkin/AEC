@@ -8,15 +8,18 @@ export const verifyJwt = (req, res, next) => {
     try {
         const token = req.headers["authorization"]?.split(" ")[1];
         if (!token) {
-            return res.status(401).json({ message: "Token not found" });
+            return res.status(401).json({ message: "Season not found" });
         }
         const decodedToken = jwt.verify(token, config.jwtSecret);
-        req.body.user = decodedToken?.UserName;
-        next(req.body);
+        if(!decodedToken?.userName){
+            return res.status(401).json({ message: "Season Expired" });
+        }
+        req.body.userName = decodedToken?.userName;
+        next();
     } catch (error) {
         console.error(error);
         if (error.message === "jwt expired") {
-            return res.status(401).json({ message: "Token Expired" });
+            return res.status(401).json({ message: "Season Expired" });
         }
         if (error.message === "invalid signature") {
             return res.status(401).json({ message: "Invalid Token" });
@@ -27,7 +30,7 @@ export const verifyJwt = (req, res, next) => {
 
 export const jwtCreate = (user: IUser) => {
     const token = jwt.sign({
-        user: user.UserName,
+        userName: user.UserName,
         email: user.Email,
     }, config.jwtSecret, {expiresIn: "1 d"},)
     return token;
