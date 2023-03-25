@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const Payment = new mongoose.Schema({
+const Transaction = new mongoose.Schema({
     Name: {
         type: String,
         required: true
@@ -20,6 +20,6 @@ const Payment = new mongoose.Schema({
     },
   });
 
-  const payment = mongoose.model('Payment', Payment);
+  const payment = mongoose.model('Transaction', Transaction);
 
 export default payment;
