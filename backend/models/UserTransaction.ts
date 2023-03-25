@@ -14,3 +14,5 @@ const UserTransactionSchema = new mongoose.Schema({
 });
 
 const UserTransaction = mongoose.model('UserTransaction', UserTransactionSchema);
+
+export default UserTransaction;
