@@ -31,6 +31,7 @@ const registerService = async (user: IUserCreation) => {
     return userData;
     // Return success message or user data
   } catch (error) {
+    console.log("an error has accrued in registration \n",error);
     return generateErrorCode(null, 1);
   }
 };
