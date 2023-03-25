@@ -1,17 +1,25 @@
 import Transaction from "../../models/Payment";
 import { Request, Response } from "express";
+import User from "../../models/user";
 
 const updateTransaction = async (req: Request, res: Response) => {
   try {
     if (req.body?.payment && req.body?.payment !== null) {
-      const { Name, Description, Date, Amount } = req.body;
-      const payment = new Transaction({
-        Name,
+      const { Description, Amount } = req.body;
+      const user = await User.findById(req.userName);
+      if(!user){
+        return res.send("Season Expired ").status(400);
+      }
+      const transaction = new Transaction({
         Description,
-        Date,
         Amount
       });
-      await payment.save();
+      const userTransaction = new UserTransaction({
+        user: user,
+        transaction: transaction
+    });
+      await transaction.save();
+      await userTransaction.save();
       res.send("Payment updated").status(200);
     }
   } catch (Exception) {
