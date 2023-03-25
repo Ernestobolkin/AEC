@@ -15,7 +15,12 @@ const createUser = async (user: IUserCreation): Promise<typeof User> => {
       });
       const savedUser = await newUser.save();
       const token = jwtCreate(savedUser);
-    return [user, token];
+      const userToReturn = {
+          UserName: savedUser.UserName,
+          Email: savedUser.Email,
+          token: token
+      }
+    return userToReturn;
   }catch(Exception){
       console.log(Exception)
       return 

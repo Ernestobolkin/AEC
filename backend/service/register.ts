@@ -28,7 +28,15 @@ const registerService = async (user: IUserCreation) => {
     if (user.userName.length < 3 || user.userName.length > 20) {
       return generateErrorCode("REGISTRATION", 1);
     }
+    // need to handle the data that returns from the repo. handle with error codes if needed
     const userData = await createUser(user);
+    if(!userData){
+      return generateErrorCode(null, 1);
+    }
+    if(userData?.message){
+      console.log("an error has accrued in registration \n",userData.message);
+      return generateErrorCode(null, 6,"something went wrong while creating the user");
+    }
     return userData;
   } catch (error) {
     console.log("an error has accrued in registration \n",error);
