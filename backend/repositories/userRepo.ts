@@ -58,7 +58,7 @@ const getUserById = async (userId: string): Promise<typeof User | null> => {
 const getUserByUserName = async (userName : string): Promise<typeof User | null> => {
   try{
       // Implementation of the get user functionality
-    const user = User.findOne({UserName: userName});
+    const user = await User.findOne({UserName: userName});
     return user;
   }catch(Exception){
       console.log(Exception)
@@ -68,7 +68,7 @@ const getUserByUserName = async (userName : string): Promise<typeof User | null>
 
 const getUserByEmail = async (email : string): Promise<typeof User | null> => {
   try{
-    const user = User.findOne({Email: email});
+    const user = await User.findOne({Email: email});
     return user;
   }
   catch(Exception){

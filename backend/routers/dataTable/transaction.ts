@@ -21,10 +21,10 @@ const updateTransaction = async (req: Request, res: Response) => {
     });
       await transaction.save();
       await userTransaction.save();
-      res.send("Payment updated").status(200);
+      return res.send("Payment updated").status(200);
     }
   } catch (Exception) {
-    res.send(Exception).status(400);
+    return res.send(Exception).status(400);
   }
 }
 
@@ -35,9 +35,9 @@ const getTransactions = async (req: Request, res: Response) => {
         return res.send("Season Expired ").status(400);
       }
         const transaction = await Transaction.find({});
-        res.send(transaction).status(200);
+        return res.send(transaction).status(200);
     } catch (Exception) {
-        res.send(Exception).status(400);
+        return res.send(Exception).status(400);
     }
 }
 

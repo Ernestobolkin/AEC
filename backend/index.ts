@@ -5,7 +5,7 @@ import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
 import { login } from "./routers/login";
-import { updateTransaction, getTransactions } from "./routers/dataTable/payments";
+import { updateTransaction, getTransactions } from "./routers/dataTable/transaction";
 import { createCard } from "./routers/dataTable/card";
 import { register } from "./routers/register";
 import Config from "./config";
