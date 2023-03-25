@@ -66,9 +66,20 @@ const getUserByUserName = async (userName : string): Promise<typeof User | null>
   }
 };
 
+const getUserByEmail = async (email : string): Promise<typeof User | null> => {
+  try{
+    const user = User.findOne({Email: email});
+    return user;
+  }
+  catch(Exception){
+    console.log(Exception)
+    return
+  }
+};
+
 const updateUser = async (userId: string, updateData: Partial<typeof User>): Promise<typeof User | null> => {
   // Implementation of the update user functionality
   return null;
 };
 
-export { createUser, getUserById, updateUser, getUserByUserName, loginUser };
+export { createUser, getUserById, updateUser, getUserByUserName, loginUser, getUserByEmail };
