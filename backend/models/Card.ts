@@ -17,10 +17,14 @@ const Card = new mongoose.Schema({
         type: String,
         required: true
     },
-    Payments:{
+    Transaction:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Payment'
-    }
+        ref: 'Transaction'
+    },
+    // Balance:{
+    //     type: Number,
+    //     required: true
+    // }
 });
 
 const card = mongoose.model('Card', Card);

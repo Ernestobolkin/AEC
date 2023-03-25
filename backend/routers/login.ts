@@ -8,16 +8,16 @@ const login = async (req: Request, res: Response) => {
       if (req.body?.userName && req.body?.password !== null) {
         const responseData = await loginService(req.body);
         if(typeof responseData === "object" ){
-            res.send(responseData).status(200);
+            return res.send(responseData).status(200);
         }else{
-          res.send(responseData).status(400);
+          return res.send(responseData).status(400);
         }
       }else{
         const errorCode = generateErrorCode("LOGIN", 1);
-        res.send(errorCode).status(400);
+        return res.send(errorCode).status(400);
       }
   } catch (Exception) {
-      res.send(Exception).status(400);
+      return res.send(Exception).status(400);
   }
 }   
 

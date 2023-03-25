@@ -1,6 +1,6 @@
 import { generateErrorCode } from "./errorCodeService";
 import { createUser } from "../repositories/userRepo";
-import { getUserByUserName } from "../repositories/userRepo";
+import { getUserByUserName ,getUserByEmail } from "../repositories/userRepo";
 import { IUserCreation } from "../interfaces/userInterface";
 
 const registerService = async (user: IUserCreation) => {
@@ -8,7 +8,8 @@ const registerService = async (user: IUserCreation) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const existingUser = await getUserByUserName(user.userName);
-    if(existingUser){
+    const existingEmail = await getUserByEmail(user.email);
+    if(existingUser || existingEmail){
         return generateErrorCode(null, 1);
     }
     
@@ -29,8 +30,8 @@ const registerService = async (user: IUserCreation) => {
     }
     const userData = await createUser(user);
     return userData;
-    // Return success message or user data
   } catch (error) {
+    console.log("an error has accrued in registration \n",error);
     return generateErrorCode(null, 1);
   }
 };
