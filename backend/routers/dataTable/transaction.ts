@@ -1,5 +1,4 @@
-import Transaction from "../../models/Payment";
-import UserTransaction from "../../models/UserTransaction";
+import Transaction from "../../models/Transaction";
 import { Request, Response } from "express";
 import User from "../../models/user";
 
@@ -15,12 +14,7 @@ const updateTransaction = async (req: Request, res: Response) => {
         Description,
         Amount
       });
-      const userTransaction = new UserTransaction({
-        user: user,
-        transaction: transaction
-    });
       await transaction.save();
-      await userTransaction.save();
       return res.send("Payment updated").status(200);
     }
   } catch (Exception) {

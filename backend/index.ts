@@ -26,7 +26,7 @@ app.post("/login", login);
 
 app.post("/register", register);
 
-app.put("/update/:id", updateTransaction);
+app.put("/update/:id",verifyJwt, updateTransaction);
 
 app.get("/transactions",verifyJwt, getTransactions);
 
