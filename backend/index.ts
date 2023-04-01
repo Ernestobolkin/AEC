@@ -5,7 +5,7 @@ import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
 import { login } from "./routers/login";
-import { updateTransaction, getTransactions } from "./routers/dataTable/transaction";
+import { updateTransaction, getTransactions, createTransaction } from "./routers/dataTable/transaction";
 import { createCard } from "./routers/dataTable/card";
 import { register } from "./routers/register";
 import Config from "./config";
@@ -27,6 +27,8 @@ app.post("/login", login);
 app.post("/register", register);
 
 app.put("/update/:id",verifyJwt, updateTransaction);
+
+app.post("/transaction",verifyJwt, createTransaction);
 
 app.get("/transactions",verifyJwt, getTransactions);
 
