@@ -32,6 +32,7 @@ import { ErrorCode } from "../interfaces/userInterface";
 // 1 = Card not created
 // 2 = User not updated
 // 3 = User not found
+// 4 = Card not found
 
 
   
