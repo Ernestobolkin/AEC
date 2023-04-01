@@ -10,7 +10,7 @@ const createCard = async (req: Request, res: Response) => {
         });
         await card.save();
         
-        return res.send("Card wat created").status(200);
+        return res.send("Card was created").status(200);
     }catch(Exception){
         return res.send(Exception).status(400);
     }

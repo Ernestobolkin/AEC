@@ -38,13 +38,14 @@ const loginUser = async (userData: IUserCreation): Promise<typeof User> => {
           return null;
       }
       const token = jwtCreate(user);
-    return [{
+    return {
       UserName: user.UserName,
       Email: user.Email,
-    }, token];
+      token,
+    };
   }catch(Exception){
       console.log(Exception)
-      return  
+      return null
   }
 };
 
