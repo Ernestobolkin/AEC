@@ -15,9 +15,12 @@ export interface IUser {
     Credentials: {
         salt: string;
     };
-    
 }
 
+export interface ICard {
+    CardIdentifierNumber: string;
+    CardName: string;
+}
 export interface ErrorCode {
     code: string;
     message: string;

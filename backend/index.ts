@@ -30,7 +30,7 @@ app.put("/update/:id",verifyJwt, updateTransaction);
 
 app.get("/transactions",verifyJwt, getTransactions);
 
-app.post("/card", createCard);
+app.post("/card",verifyJwt, createCard);
 
 
 mongoose.set('strictQuery', true);

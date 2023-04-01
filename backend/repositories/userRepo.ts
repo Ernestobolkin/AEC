@@ -83,9 +83,14 @@ const getUserByEmail = async (email : string): Promise<typeof User | null> => {
   }
 };
 
-const updateUser = async (userId: string, updateData: Partial<typeof User>): Promise<typeof User | null> => {
-  // Implementation of the update user functionality
-  return null;
+const updateUser = async (userId: string, updateData: Record<string, any>): Promise<typeof User | null> => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+    return updatedUser;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export { createUser, getUserById, updateUser, getUserByUserName, loginUser, getUserByEmail };

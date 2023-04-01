@@ -10,10 +10,10 @@ const UserSchema = new mongoose.Schema({
             required: true,
             minlength: 8
     },
-    Cards:{
+    Cards:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Card'
-    },
+    }],
     CreationDate: {
         type: String,
         default: new Date().toLocaleTimeString("he-IL", {timeZone: "Asia/Jerusalem"}) + " " + new Date().toLocaleDateString("he-IL", {timeZone: "Asia/Jerusalem"})
