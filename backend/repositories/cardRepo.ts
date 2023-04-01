@@ -1,5 +1,6 @@
-import { ICard, IUserCreation } from "../interfaces/userInterface";
+import { ICard, IUserCreation, ITransaction } from "../interfaces/userInterface";
 import Card from "../models/Card";
+
 
 const createCard = async (card: ICard, userData: IUserCreation) => {
     try {
@@ -11,8 +12,8 @@ const createCard = async (card: ICard, userData: IUserCreation) => {
         await newCard.save();
         return newCard;
     }
-    catch (error) {
-        console.log("an error has accrued while trying to create  \n", error);
+    catch (Exception) {
+        console.log("an error has accrued while trying to create  \n", Exception);
         return null
     }
 };

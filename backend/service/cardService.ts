@@ -1,8 +1,11 @@
 import { generateErrorCode } from "./errorCodeService";
-import { ICard, IUserCreation } from "../interfaces/userInterface";
+import { ICard, ITransaction, IUserCreation } from "../interfaces/userInterface";
 import { getUserByUserName } from "../repositories/userRepo";
 import { createCard } from "../repositories/cardRepo";
 import { updateUser } from "../repositories/userRepo";
+import Transaction from "../models/Transaction";
+import User from "../models/user";
+import Card from "../models/Card";
 
 
 const cardCreationService = async (card:ICard, userData:IUserCreation) => {
@@ -27,4 +30,27 @@ const cardCreationService = async (card:ICard, userData:IUserCreation) => {
     }
 }
 
-export { cardCreationService };
+const updateTransactionService = async ({Description, Amount, CardId}:ITransaction,  userData: IUserCreation) => {
+    try{
+        if(userData.Cards.includes(CardId) === false){
+            return generateErrorCode("CR", 4);
+        }
+        const newTransaction = new Transaction({
+            Description,
+            Amount
+          });
+          const updatedCard = await Card.findByIdAndUpdate(
+            CardId,
+            { $push: { Transactions: newTransaction } },
+            { new: true }
+          );
+        await newTransaction.save();
+        return updatedCard;
+    }catch(Exception){
+        console.log("an error has accrued while trying to create transaction  \n", Exception);
+        return null
+    }
+}
+
+
+export { cardCreationService, updateTransactionService };
