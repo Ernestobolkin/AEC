@@ -6,7 +6,7 @@ import path from "path";
 import mongoose from "mongoose";
 import { login } from "./routers/login";
 import { updateTransaction, getTransactions, createTransaction } from "./routers/dataTable/transaction";
-import { createCard } from "./routers/dataTable/card";
+import { insertCard } from "./routers/dataTable/card";
 import { register } from "./routers/register";
 import Config from "./config";
 import { verifyJwt } from "./service/jwtService";
@@ -32,7 +32,7 @@ app.post("/transaction",verifyJwt, createTransaction);
 
 app.get("/transactions",verifyJwt, getTransactions);
 
-app.post("/card",verifyJwt, createCard);
+app.post("/card", verifyJwt, insertCard);
 
 
 mongoose.set('strictQuery', true);
