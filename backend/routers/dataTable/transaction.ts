@@ -1,7 +1,6 @@
 import Transaction from "../../models/Transaction";
 import { Request, Response } from "express";
-import User from "../../models/user";
-import { updateTransactionService } from "../../service/cardService";
+import { updateTransactionService, fetchCardsService } from "../../service/cardService";
 import { getUserByUserName } from "../../repositories/userRepo";
 
 const createTransaction = async (req: Request, res: Response) => {
@@ -24,17 +23,23 @@ const createTransaction = async (req: Request, res: Response) => {
 }
 
 
-const getTransactions = async (req: Request, res: Response) => {
+const getCardDetails = async (req: Request, res: Response) => {
     try {
       if(!req.body?.userName){
         return res.send("Season Expired ").status(400);
       }
-        const transaction = await Transaction.find({});
-        return res.send(transaction).status(200);
+      if(!req.body?.CardId){
+        return res.send("CardId is required").status(400);
+      }
+        const response = await fetchCardsService(req.body.userName, req.body?.CardId)
+        if(response?.code || response?.message){
+          return res.send(response).status(400);
+        }
+        return res.send(response).status(200);
     } catch (Exception) {
         return res.send(Exception).status(400);
     }
 }
 
 
-export { getTransactions, createTransaction };
+export { getCardDetails, createTransaction };

@@ -18,10 +18,10 @@ const insertCard = async (card: ICard, userData: IUserCreation) => {
     }
 };
 
-const fetchCard = async (userName: string, cardId:string) => {
+const fetchCards = async (userName: string, cardId:string) => {
     try {
-        const card = Card.find({NameHolder: userName, _id: cardId});
-        return card;
+        const cards = Card.find({NameHolder: userName, _id: cardId});
+        return cards;
     }catch(Exception){
         console.log("an error has accrued while trying to fetch card  \n", Exception);
         return null
@@ -42,7 +42,9 @@ const updateCard = async (newTransaction: ITransaction , CardId: string , userDa
         return null
     }
 }
+
+
         
 
 
-export { insertCard, fetchCard, updateCard  };
+export { insertCard, fetchCards, updateCard  };

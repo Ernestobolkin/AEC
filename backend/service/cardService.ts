@@ -1,7 +1,7 @@
 import { generateErrorCode } from "./errorCodeService";
 import { ICard, ITransaction, IUserCreation } from "../interfaces/userInterface";
 import { getUserByUserName } from "../repositories/userRepo";
-import { insertCard, updateCard  } from "../repositories/cardRepo";
+import { fetchCards, insertCard, updateCard  } from "../repositories/cardRepo";
 import { updateUser } from "../repositories/userRepo";
 
 
@@ -43,5 +43,18 @@ const updateTransactionService = async ({Description, Amount, CardId}:ITransacti
     }
 }
 
+const fetchCardsService = async (userName: string, cardId:string) => {
+    try {
+        const cards = await fetchCards(userName, cardId);
+        if(!cards){
+            return generateErrorCode("CR", 6, "Card was not found");
+        }
+        return cards;
+    }catch(Exception){
+        console.log("an error has accrued while trying to fetch card  \n", Exception);
+        return generateErrorCode(null, 1);
+    }
+}
 
-export { cardCreationService, updateTransactionService };
+
+export { cardCreationService, updateTransactionService, fetchCardsService };
