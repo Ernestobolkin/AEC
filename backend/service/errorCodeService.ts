@@ -28,11 +28,13 @@ import { ErrorCode } from "../interfaces/userInterface";
 // 2 = Failed to login, jwt error.
 
 
-// Error code numbers for Card error || CR
+// Error code numbers for Card and transaction errors || CR
 // 1 = Card not created
 // 2 = User not updated
 // 3 = User not found
 // 4 = Card not found
+// 5 = Transaction not created
+
 
 
   

@@ -2,7 +2,7 @@ import { ICard, IUserCreation, ITransaction } from "../interfaces/userInterface"
 import Card from "../models/Card";
 
 
-const createCard = async (card: ICard, userData: IUserCreation) => {
+const insertCard = async (card: ICard, userData: IUserCreation) => {
     try {
         const newCard = new Card({
             CardIdentifierNumber: card.CardIdentifierNumber,
@@ -18,4 +18,31 @@ const createCard = async (card: ICard, userData: IUserCreation) => {
     }
 };
 
-export { createCard };
+const fetchCard = async (userName: string, cardId:string) => {
+    try {
+        const card = Card.find({NameHolder: userName, _id: cardId});
+        return card;
+    }catch(Exception){
+        console.log("an error has accrued while trying to fetch card  \n", Exception);
+        return null
+    }
+}
+
+const updateCard = async (newTransaction: ITransaction , CardId: string , userData: IUserCreation) => {
+    try {
+        const updatedCard = await Card.findByIdAndUpdate(
+            CardId,
+            { $push: { Transactions: newTransaction } },
+            { new: true }
+          );
+        await updatedCard.save();
+        return updatedCard;
+    }catch(Exception){
+        console.log("an error has accrued while trying to create transaction  \n", Exception);
+        return null
+    }
+}
+        
+
+
+export { insertCard, fetchCard, updateCard  };

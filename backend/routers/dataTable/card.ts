@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { cardCreationService } from "../../service/cardService";
 import { ICard } from "../../interfaces/userInterface";
 
-const createCard = async (req: Request, res: Response) => {
+const insertCard = async (req: Request, res: Response) => {
     try{
         const { cardIdentifierNumber, cardName } = req.body;
         if(!cardIdentifierNumber || !cardName){
@@ -13,7 +13,7 @@ const createCard = async (req: Request, res: Response) => {
             CardIdentifierNumber: cardIdentifierNumber,
             CardName: cardName,
         }
-        const response = await cardCreationService(card,req.body);
+        const response = await cardCreationService(card, req.body);
         if(response){
             return res.send(response).status(400);
         }
@@ -23,4 +23,16 @@ const createCard = async (req: Request, res: Response) => {
     }
 }
 
-export { createCard };
+// const fetchCards = async (req: Request, res: Response) => {
+//     try{
+//         const { userName } = req.body;
+//         if(!userName){
+//             return res.send("Missing some parameters").status(400);
+//         }
+//         const response = await cardCreationService(card, req.body);
+//         if(response){
+//             return res.send(response).status(400);
+//         }
+//         return res.send("Card created successfully").status(200);
+
+export { insertCard };
