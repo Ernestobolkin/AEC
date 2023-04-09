@@ -4,26 +4,6 @@ import User from "../../models/user";
 import { updateTransactionService } from "../../service/cardService";
 import { getUserByUserName } from "../../repositories/userRepo";
 
-const updateTransaction = async (req: Request, res: Response) => {
-  try {
-    if (req.body?.payment && req.body?.payment !== null) {
-      const { Description, Amount } = req.body;
-      const user = await User.findById(req.userName);
-      if(!user){
-        return res.send("Season Expired ").status(400);
-      }
-      const transaction = new Transaction({
-        Description,
-        Amount
-      });
-      await transaction.save();
-      return res.send("Payment updated").status(200);
-    }
-  } catch (Exception) {
-    return res.send(Exception).status(400);
-  }
-}
-
 const createTransaction = async (req: Request, res: Response) => {
   try {
     if (req.body?.Description && req.body?.Amount !== null) {
@@ -57,4 +37,4 @@ const getTransactions = async (req: Request, res: Response) => {
 }
 
 
-export { updateTransaction, getTransactions, createTransaction };
+export { getTransactions, createTransaction };

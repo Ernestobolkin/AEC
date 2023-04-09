@@ -33,7 +33,6 @@ import { ErrorCode } from "../interfaces/userInterface";
 // 2 = User not updated
 // 3 = User not found
 // 4 = Card not found
-// 5 = Transaction not created
 
 
 

@@ -18,8 +18,18 @@ const Card = new mongoose.Schema({
         required: true
     },
     Transactions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Transaction'
+        Description: {
+            type: String,
+            required: false
+        },
+        Date: {
+            type: String,
+            default:new Date().toLocaleTimeString("he-IL", {timeZone: "Asia/Jerusalem"}) + " " + new Date().toLocaleDateString("he-IL", {timeZone: "Asia/Jerusalem"})
+        },
+        Amount: {
+            type: Number,
+            required: true
+        },
     }]
 });
 
