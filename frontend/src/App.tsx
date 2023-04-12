@@ -5,13 +5,13 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import routesTest from './constants/routes';
+import routes from './constants/routes';
 function App() {
   return (
     <BrowserRouter>
     <Layout />
       <Routes>
-        {routesTest.map((route, i) => (
+        {routes.map((route, i) => (
           <Route
             key={route.name ? route.name + i : i}
             path={route.path}
