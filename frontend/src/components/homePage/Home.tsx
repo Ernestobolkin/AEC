@@ -32,42 +32,42 @@ const HomePage = () => {
         const response = await generalRequest("test", "GET");
         console.log(response);
     }
-    return (
-        <div>
-            <div className="conatiner">
-                <form className="row g-3" onSubmit={submit}>
-                    <div className="mb-3">
-                        <label htmlFor="" className="form-label">UserName</label>
-                        <input 
-                            type="text" 
-                            onChange={onChange}
-                            value={userData.userName} 
-                            className=" userName" 
-                            name="userName" 
-                            placeholder="Enter your username"
-                            />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input 
-                            type="password" 
-                            onChange={onChange} 
-                            value={userData.passWord} 
-                            className="form-control password" 
-                            name="password" 
-                            placeholder="Enter your password" />
-                    </div>
-                    <div className="mb-3">
-                        <button type="submit" className="btn btn-primary">Sign in</button>
-                    </div>
-                </form>
-                <div className="row">
-                    <button className="btn btn-secondary" onClick={checkMe}>check-me</button>
-                </div>
-            </div>
 
+    return (
+        <div className="container">
+          <div className="row justify-content-center mt-5">
+            <div className="col-md-6">
+              <form onSubmit={submit}>
+                <div className="mb-3">
+                  <label htmlFor="userName" className="form-label">Username</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="userName"
+                    name="userName"
+                    value={userData.userName}
+                    onChange={onChange}
+                    placeholder="Enter your username"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    value={userData.passWord}
+                    onChange={onChange}
+                    placeholder="Enter your password"
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary w-100">Sign in</button>
+              </form>
+            </div>
+          </div>
         </div>
-    );
+      );
 };
 
 export default HomePage;
