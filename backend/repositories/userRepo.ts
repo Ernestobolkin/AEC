@@ -15,7 +15,12 @@ const createUser = async (user: IUserCreation): Promise<typeof User> => {
       });
       const savedUser = await newUser.save();
       const token = jwtCreate(savedUser);
-    return [user, token];
+      const userToReturn = {
+          UserName: savedUser.UserName,
+          Email: savedUser.Email,
+          token: token
+      }
+    return userToReturn;
   }catch(Exception){
       console.log(Exception)
       return 
@@ -33,13 +38,14 @@ const loginUser = async (userData: IUserCreation): Promise<typeof User> => {
           return null;
       }
       const token = jwtCreate(user);
-    return [{
+    return {
       UserName: user.UserName,
       Email: user.Email,
-    }, token];
+      token,
+    };
   }catch(Exception){
       console.log(Exception)
-      return  
+      return null
   }
 };
 
@@ -77,9 +83,14 @@ const getUserByEmail = async (email : string): Promise<typeof User | null> => {
   }
 };
 
-const updateUser = async (userId: string, updateData: Partial<typeof User>): Promise<typeof User | null> => {
-  // Implementation of the update user functionality
-  return null;
+const updateUser = async (userId: string, updateData: Record<string, any>): Promise<typeof User | null> => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+    return updatedUser;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export { createUser, getUserById, updateUser, getUserByUserName, loginUser, getUserByEmail };

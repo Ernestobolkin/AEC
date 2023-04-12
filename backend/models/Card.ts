@@ -17,14 +17,20 @@ const Card = new mongoose.Schema({
         type: String,
         required: true
     },
-    Transaction:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Transaction'
-    },
-    // Balance:{
-    //     type: Number,
-    //     required: true
-    // }
+    Transactions: [{
+        Description: {
+            type: String,
+            required: false
+        },
+        Date: {
+            type: String,
+            default:new Date().toLocaleTimeString("he-IL", {timeZone: "Asia/Jerusalem"}) + " " + new Date().toLocaleDateString("he-IL", {timeZone: "Asia/Jerusalem"})
+        },
+        Amount: {
+            type: Number,
+            required: true
+        },
+    }]
 });
 
 const card = mongoose.model('Card', Card);

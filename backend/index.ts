@@ -5,8 +5,8 @@ import cors from "cors";
 import path from "path";
 import mongoose from "mongoose";
 import { login } from "./routers/login";
-import { updateTransaction, getTransactions } from "./routers/dataTable/transaction";
-import { createCard } from "./routers/dataTable/card";
+import { getCardDetails, createTransaction } from "./routers/dataTable/transaction";
+import { insertCard } from "./routers/dataTable/card";
 import { register } from "./routers/register";
 import Config from "./config";
 import { verifyJwt } from "./service/jwtService";
@@ -26,11 +26,11 @@ app.post("/login", login);
 
 app.post("/register", register);
 
-app.put("/update/:id", updateTransaction);
+app.post("/transaction",verifyJwt, createTransaction);
 
-app.get("/transactions",verifyJwt, getTransactions);
+app.get("/transactions",verifyJwt, getCardDetails);
 
-app.post("/card", createCard);
+app.post("/card", verifyJwt, insertCard);
 
 
 mongoose.set('strictQuery', true);

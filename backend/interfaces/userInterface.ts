@@ -3,6 +3,7 @@ export interface IUserCreation {
     password?: string;
     email?: string;
     signature?: string;
+    Cards?: string[];
 }
 
 export interface IUser {
@@ -15,9 +16,19 @@ export interface IUser {
     Credentials: {
         salt: string;
     };
-    
 }
 
+export interface ITransaction {
+    CardId?: string;
+    Description: string;
+    Amount: number;
+    Date?: string;
+}
+
+export interface ICard {
+    CardIdentifierNumber: string;
+    CardName: string;
+}
 export interface ErrorCode {
     code: string;
     message: string;
