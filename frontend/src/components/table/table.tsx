@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 // import apiService from "../../service/apiService";
 import { generalRequest } from "../../service/apiService";
+import Alert  from "../Alert/alert";
 
 const TableCrud = () => {
+    const [error, setError] = useState("");
+    
     const [paymentData, setPaymentData] = useState({
-        name:"",
-        description:"",
-        date:"",
-        amount:"",
+        name: "",
+        description: "",
+        date: "",
+        amount: "",
     });
     const [paymentList, setPaymentList] = useState<typeof paymentData[]>([]);
 
@@ -26,6 +29,10 @@ const TableCrud = () => {
     }
     const getData = async () => {
         let responseData = await generalRequest("payments", "GET");
+        if (responseData?.code !== 200) {
+            setError("Something went wrong");
+            return
+        }
         responseData.forEach((payment: any) => {
             setPaymentList([...paymentList, {
                 name: payment.Name,
@@ -34,92 +41,93 @@ const TableCrud = () => {
                 amount: payment.Amount,
             }]);
         });
-        console.log("responseData",responseData)
-        console.log(paymentList)
     }
 
-    useEffect  (() => {
+    useEffect(() => {
         getData();
     }, [])
-    
 
-    return(
-            <>
-                <div className="container input">
-                    <form className="row g-3" onSubmit={submit}>
-                        <div className="mb-3">
-                            <label htmlFor="name" className="form-label">Name</label>
-                            <input
-                                type="text"
-                                onChange={onChange}
-                                value={paymentData.name}
-                                className="form-control"
-                                name="name"
-                                placeholder="Name of the payment"
-                            />
-                            <input type="text"
-                                onChange={onChange}
-                                value={paymentData.description}
-                                className="form-control"
-                                name="description"
-                                placeholder="Description of the payment"
-                            />
-                            <input type="text"
-                                onChange={onChange}
-                                value={paymentData.date}
-                                className="form-control"
-                                name="date"
-                                placeholder="Date of the payment"
-                            />
-                            <input type="text"
-                                onChange={onChange}
-                                value={paymentData.amount}
-                                className="form-control"
-                                name="amount"
-                                placeholder="Amount of the payment"
-                            />
-                            <button type="submit" className="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
-                <div className="container output">
-                    <div className="row">
-                        <div className="col">
-                            <strong>Name</strong>
-                        </div>
-                        <div className="col">
-                            <strong>Description</strong>
-                        </div>
-                        <div className="col">
-                            <strong>Date</strong>
-                        </div>
-                        <div className="col">
-                            <strong>Amount</strong>
-                        </div>
+
+    return (
+        <>
+            <div className="container input">
+                {error && 
+                (<Alert type="danger" message={error} function={setError} />)
+                }
+                <form className="row g-3" onSubmit={submit}>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">Name</label>
+                        <input
+                            type="text"
+                            onChange={onChange}
+                            value={paymentData.name}
+                            className="form-control"
+                            name="name"
+                            placeholder="Name of the payment"
+                        />
+                        <input type="text"
+                            onChange={onChange}
+                            value={paymentData.description}
+                            className="form-control"
+                            name="description"
+                            placeholder="Description of the payment"
+                        />
+                        <input type="text"
+                            onChange={onChange}
+                            value={paymentData.date}
+                            className="form-control"
+                            name="date"
+                            placeholder="Date of the payment"
+                        />
+                        <input type="text"
+                            onChange={onChange}
+                            value={paymentData.amount}
+                            className="form-control"
+                            name="amount"
+                            placeholder="Amount of the payment"
+                        />
+                        <button type="submit" className="btn btn-primary">Save</button>
                     </div>
-                    {
-                        paymentList.map((payment: any, index:number) => {
-                            return(
-                                <div key={index} className="row">
-                                    <div className="col">
-                                        {payment.name}
-                                    </div>
-                                    <div className="col">
-                                        {payment.description}
-                                    </div>
-                                    <div className="col">
-                                        {payment.date}
-                                    </div>
-                                    <div className="col">
-                                        {payment.amount}
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                </form>
+            </div>
+            <div className="container output">
+                <div className="row">
+                    <div className="col">
+                        <strong>Name</strong>
+                    </div>
+                    <div className="col">
+                        <strong>Description</strong>
+                    </div>
+                    <div className="col">
+                        <strong>Date</strong>
+                    </div>
+                    <div className="col">
+                        <strong>Amount</strong>
+                    </div>
                 </div>
-            </>
-        )
+                {
+                    paymentList.map((payment: any, index: number) => {
+                        return (
+                            <div key={index} className="row">
+                                <div className="col">
+                                    {payment.name}
+                                </div>
+                                <div className="col">
+                                    {payment.description}
+                                </div>
+                                <div className="col">
+                                    {payment.date}
+                                </div>
+                                <div className="col">
+                                    {payment.amount}
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </>
+    )
 }
 
 

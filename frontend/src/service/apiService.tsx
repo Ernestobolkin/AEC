@@ -29,7 +29,6 @@ export const loginRequest = async( userData:User ) => {
 }
 
 export const generalRequest = async (url: string, method: string, body?: any) => {
-    console.log(`${enviroment.API_URL}/${url}`);
     try {
        switch (method) {
             case "GET":
@@ -55,8 +54,7 @@ export const generalRequest = async (url: string, method: string, body?: any) =>
             default:
        }
     } catch (error) {
-        console.log(error);
-        throw error
+        return error;
     }
 };
 
