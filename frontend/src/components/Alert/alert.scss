@@ -1,0 +1,20 @@
+.alert {
+    position: absolute;
+    left: -100%; /* Initial position */
+    animation: slideInAndOut 5s ease-in-out; 
+  }
+  
+  @keyframes slideInAndOut {
+    0% {
+      left: -100%; /* Initial position */
+    }
+    20% {
+      left: 1%; /* Slide in */
+    }
+    80% {
+      left: 1%; /* Stay in */
+    }
+    100% {
+      left: -100%; /* Slide out */
+    }
+  }
